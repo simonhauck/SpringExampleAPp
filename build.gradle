@@ -2,9 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.4.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
-
-    // For integration tests
-    id 'com.softeq.gradle.itest' version '1.0.4'
+    id 'idea'
 }
 
 group = 'de.simonhauck'
@@ -47,21 +45,36 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-test {
+// Test and integrationTest should print logging events and use JUnit
+tasks.withType(Test) {
     useJUnitPlatform()
-    testLogging.showStandardStreams = true
-    testLogging.exceptionFormat = 'full'
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
 }
 
-itestSourceSet {
-    name = "integrationTest"
-    compileClasspath = sourceSets.main.compileClasspath + sourceSets.test.compileClasspath
-    runtimeClasspath = sourceSets.main.runtimeClasspath + sourceSets.test.runtimeClasspath
+// Define integration test
+sourceSets {
+    integrationTest {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
 }
 
-// Enable junit for integration test
-integrationTest {
-    useJUnitPlatform()
+configurations {
+    integrationTestImplementation.extendsFrom testImplementation
+    integrationTestRuntimeOnly.extendsFrom testRuntimeOnly
 }
 
+task integrationTest(type: Test) {
+    description = 'Runs integration tests.'
+    group = 'verification'
+
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    shouldRunAfter test
+}
+
+check.dependsOn integrationTest
 
