@@ -9,6 +9,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 
 import de.simonhauck.demo.IntegrationTest;
+import lombok.extern.slf4j.Slf4j;
 
 public class ExampleControllerIT extends IntegrationTest {
 
@@ -17,6 +18,7 @@ public class ExampleControllerIT extends IntegrationTest {
 
     @Test
     public void greetingSuccess() {
+        System.out.println("Test");
         ResponseEntity<String> actual = restTemplate.getForEntity("/", String.class);
 
         assertThat(actual.getStatusCode().is2xxSuccessful()).isTrue();
