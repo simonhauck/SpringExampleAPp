@@ -1,0 +1,65 @@
+plugins {
+    id 'org.springframework.boot' version '2.4.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+
+    // For integration tests
+    id 'com.softeq.gradle.itest' version '1.0.4'
+}
+
+group = 'de.simonhauck'
+sourceCompatibility = '15'
+
+// Load version from file
+def buildProperties = new Properties()
+file("version.properties").withInputStream { stream ->
+    buildProperties.load(stream)
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.liquibase:liquibase-core'
+
+    // Annotation on classes etc
+    compileOnly 'org.projectlombok:lombok'
+
+    // Faster restart
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    runtimeOnly 'com.h2database:h2'
+
+    // Process annotations
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // Tests
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+itestSourceSet {
+    name = "integrationTest"
+    compileClasspath = sourceSets.main.compileClasspath + sourceSets.test.compileClasspath
+    runtimeClasspath = sourceSets.main.runtimeClasspath + sourceSets.test.runtimeClasspath
+}
+
+// Enable junit for integration test
+integrationTest {
+    useJUnitPlatform()
+}
+
+
