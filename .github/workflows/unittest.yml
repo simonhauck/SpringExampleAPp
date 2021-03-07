@@ -1,4 +1,4 @@
-name: Unit Test with Gradle
+name: Unit and Integration Tests with Gradle
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   test:
-    name: Unit Test
+    name: Unit & Integration Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -17,5 +17,9 @@ jobs:
         java-version: 15
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+    - name: Build with gradle
+      run: ./gradlew clean build -x test -x integrationTest
     - name: Run Unit Tests with Gradle
       run: ./gradlew test
+    - name: Run Integration Tests with Gradle
+      run: ./gradlew integrationTest

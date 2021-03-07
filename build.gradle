@@ -49,6 +49,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    testLogging.showStandardStreams = true
+    testLogging.exceptionFormat = 'full'
 }
 
 itestSourceSet {
