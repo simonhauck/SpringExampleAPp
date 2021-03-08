@@ -57,14 +57,12 @@ tasks.withType(Test) {
 }
 
 jacocoTestReport {
-    dependsOn test // tests are required to run before generating the report
-
     reports {
         xml.enabled true
-        csv.enabled false
+//        csv.enabled false
     }
 
-    getExecutionData().setFrom(fileTree(buildDir).include("/jacoco/*.exec"))
+//    getExecutionData().setFrom(fileTree(buildDir).include("/jacoco/*.exec"))
 }
 
 // Define integration test
