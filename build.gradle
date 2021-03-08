@@ -63,6 +63,8 @@ jacocoTestReport {
         xml.enabled true
         csv.enabled false
     }
+
+    getExecutionData().setFrom(fileTree(buildDir).include("/jacoco/*.exec"))
 }
 
 // Define integration test
