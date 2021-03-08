@@ -50,7 +50,7 @@ dependencies {
 tasks.withType(Test) {
     useJUnitPlatform()
     testLogging {
-        events "passed", "skipped", "failed", "standardOut", "standardError"
+        events "passed", "skipped", "failed", "standardError" //, "standardOut"
     }
     finalizedBy jacocoTestReport // report is always generated after tests run
 
@@ -58,7 +58,7 @@ tasks.withType(Test) {
 
 jacocoTestReport {
     reports {
-        xml.enabled false
+        xml.enabled true
 //        csv.enabled false
     }
 
