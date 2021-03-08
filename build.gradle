@@ -99,7 +99,7 @@ sonarqube {
         property "sonar.host.url", "https://sonarcloud.io"
 
         // Test jacoco plugin
-        property "sonar.jacoco.itReportPath", "build/jacoco/integrationTest.exec"
+//        property "sonar.jacoco.itReportPath", "build/jacoco/integrationTest.exec"
     }
 }
 
