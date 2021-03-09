@@ -2,7 +2,8 @@ name: Unit and Integration Tests and Docker Deploy Master
 
 on:
   push:
-    - 'master'
+    branches:
+        - master
 
 jobs:
   test:
