@@ -21,6 +21,6 @@ public class ExampleControllerTest {
     public void greeting() {
         HelloWorldDto actual = classUnderTest.greeting();
 
-        Assertions.assertThat(actual.getMessage()).isEqualTo("TestMessage");
+        Assertions.assertThat(actual.getMessage()).isEqualTo("TestMessageNew");
     }
 }
