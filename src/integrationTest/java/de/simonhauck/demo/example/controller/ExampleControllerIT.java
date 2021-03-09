@@ -21,7 +21,7 @@ public class ExampleControllerIT extends IntegrationTest {
         ResponseEntity<String> actual = restTemplate.getForEntity("/", String.class);
 
         assertThat(actual.getStatusCode().is2xxSuccessful()).isTrue();
-        assertThat(actual.getBody()).isEqualTo("{\"message\":\"TestMessage\"}");
+        assertThat(actual.getBody()).isEqualTo("{\"message\":\"TestMessageNew\"}");
     }
 
 }

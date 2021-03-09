@@ -12,6 +12,6 @@ public class ExampleController {
     @GetMapping("/")
     public HelloWorldDto greeting() {
         log.info("Hello world called");
-        return new HelloWorldDto("TestMessage");
+        return new HelloWorldDto("TestMessageNew\");
     }
 }
