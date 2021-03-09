@@ -2,6 +2,8 @@ name: Unit and Integration Tests with Gradle
 
 on:
   push:
+    - 'master'
+    - 'develop'
   pull_request:
 
 jobs:
@@ -41,6 +43,7 @@ jobs:
         path: ~/.sonar/cache
         key: ${{ runner.os }}-sonar
         restore-keys: ${{ runner.os }}-sonar
+
     - name: Analyze on sonar
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
